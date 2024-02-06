@@ -21,6 +21,7 @@ Route::apiResource('/products', ProductController::class);
 Route::apiResource('/machines', MachinesController::class);
 Route::post('/machines/{machine}/products', [MachinesController::class, 'addProduct']);
 Route::delete('/machines/{machine}/products/{id}', [MachinesController::class, 'removeProduct']);
+Route::get('/machines/{machine}/products', [MachinesController::class, 'listProduct']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
