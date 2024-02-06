@@ -80,6 +80,14 @@ class MachinesController extends Controller
 
     // Products
     /**
+     * List products from machine
+     */
+    public function listProduct(Request $request, Machine $machine)
+    {
+        return response()->json(['data' => $machine->products]);
+    }
+
+    /**
      * Add product to the machine
      */
     public function addProduct(Request $request, Machine $machine)
