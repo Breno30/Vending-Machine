@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Transaction;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class TransactionController extends Controller
@@ -38,6 +39,17 @@ class TransactionController extends Controller
             ], 400);
         }
 
+        $relation = DB::table('machine_product')
+            ->where('machine_id', $machineId)
+            ->where('product_id', $productId)
+            ->first();
+
+        if (!$relation) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Product not found in this machine'
+            ], 400);
+        }
 
         $response = Http::withHeaders([
             'accept' => 'application/json',
@@ -64,10 +76,9 @@ class TransactionController extends Controller
         $qrCodeBase = $data->point_of_interaction->transaction_data->qr_code_base64;
 
         Transaction::create([
-            "machine_id"=> $machineId,
-            "product_id"=> $productId,
-            "price" => $productPrice,
-            "identifier" => $identifier
+            'machine_product_id' => $relation->id,
+            'type' => 'pix',
+            'identifier' => $identifier
         ]);
 
         return response()->json([
