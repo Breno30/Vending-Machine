@@ -23,8 +23,18 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+
+        // Store image
+        $imagePath = $request->file('image')->store('products');
+
         // Create a new product
-        $product = Product::create($request->all());
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $imagePath
+        ]);
+
         return response()->json(['data' => $product], 201);
     }
 
