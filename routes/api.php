@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MachinesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::apiResource('/machines', MachinesController::class);
 Route::post('/machines/{machine}/products', [MachinesController::class, 'addProduct']);
 Route::delete('/machines/{machine}/products/{id}', [MachinesController::class, 'removeProduct']);
 Route::get('/machines/{machine}/products', [MachinesController::class, 'listProduct']);
+
+Route::apiResource('/transactions', TransactionController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
