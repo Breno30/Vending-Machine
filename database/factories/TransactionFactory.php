@@ -23,7 +23,7 @@ class TransactionFactory extends Factory
         return [
             'machine_product_id' => $relation->id,
             'type' => 'pix',
-            'identifier' => fake()->unique()->randomNumber
+            'identifier' => random_int(10000000, 99999999)
         ];
         
     }
