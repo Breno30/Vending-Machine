@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductForm;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -21,10 +22,20 @@ class ProductController extends Controller
         return response()->json(['data' => $product]);
     }
 
-    public function store(Request $request)
+    public function store(StoreProductForm $request)
     {
+
+        // Store image
+        $imagePath = $request->file('image')->store('products');
+
         // Create a new product
-        $product = Product::create($request->all());
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $imagePath
+        ]);
+
         return response()->json(['data' => $product], 201);
     }
 
