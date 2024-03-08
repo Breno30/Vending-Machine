@@ -78,7 +78,8 @@ class TransactionController extends Controller
         Transaction::create([
             'machine_product_id' => $relation->id,
             'type' => 'pix',
-            'identifier' => $identifier
+            'identifier' => $identifier,
+            'status' => 'pending'
         ]);
 
         return response()->json([
