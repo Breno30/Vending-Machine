@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductForm;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class ProductController extends Controller
         return response()->json(['data' => $product]);
     }
 
-    public function store(Request $request)
+    public function store(StoreProductForm $request)
     {
 
         // Store image
