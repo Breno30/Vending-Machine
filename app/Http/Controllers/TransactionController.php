@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
@@ -96,5 +97,29 @@ class TransactionController extends Controller
     public function show(Transaction $transaction)
     {
         return response()->json(['data' => $transaction]);
+    }
+
+    /**
+     * Handle webhook from mercado pago.
+     */
+    public function handleWebhook(Request $request) {
+        Log::info($request);
+
+        if ($request->action != 'payment.update') {
+            return [
+                'success' => false,
+                'message' => 'unable to handle this action'
+            ];
+         }
+    
+        $identifier = $request->data['id'];
+    
+        $transaction = Transaction::where('identifier', $identifier)->first();
+        $transaction->status = 'approved';
+        $transaction->save();
+    
+        return [
+            'success' => true
+        ];
     }
 }
