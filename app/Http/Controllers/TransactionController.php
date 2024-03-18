@@ -115,6 +115,14 @@ class TransactionController extends Controller
         $identifier = $request->data['id'];
     
         $transaction = Transaction::where('identifier', $identifier)->first();
+
+        if (!$transaction) {
+            return [
+                'success' => false,
+                'message' => 'Transaction not found'
+            ];
+        }
+
         $transaction->status = 'approved';
         $transaction->save();
     
