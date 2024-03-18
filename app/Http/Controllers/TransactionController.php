@@ -105,7 +105,7 @@ class TransactionController extends Controller
     public function handleWebhook(Request $request) {
         Log::info($request);
 
-        if ($request->action != 'payment.update') {
+        if ($request->action != 'payment.updated') {
             return [
                 'success' => false,
                 'message' => 'unable to handle this action'
@@ -123,11 +123,19 @@ class TransactionController extends Controller
             ];
         }
 
-        $transaction->status = 'approved';
+        $transactionData = Http::withHeaders([
+            'accept' => 'application/json',
+            'content-type' => 'application/json',
+            'Authorization' => 'Bearer ' . env('MERCADO_PAGO_ACCESS_TOKEN')
+        ])->get("https://api.mercadopago.com/v1/payments/$identifier");
+
+        $status = $transactionData['status'];
+
+        $transaction->status = $status;
         $transaction->save();
     
         return [
-            'success' => true
+            'success' => $status == 'approved'
         ];
     }
 }
