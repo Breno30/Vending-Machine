@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
@@ -78,7 +79,8 @@ class TransactionController extends Controller
         Transaction::create([
             'machine_product_id' => $relation->id,
             'type' => 'pix',
-            'identifier' => $identifier
+            'identifier' => $identifier,
+            'status' => 'pending'
         ]);
 
         return response()->json([
@@ -95,5 +97,45 @@ class TransactionController extends Controller
     public function show(Transaction $transaction)
     {
         return response()->json(['data' => $transaction]);
+    }
+
+    /**
+     * Handle webhook from mercado pago.
+     */
+    public function handleWebhook(Request $request) {
+        Log::info($request);
+
+        if ($request->action != 'payment.updated') {
+            return [
+                'success' => false,
+                'message' => 'unable to handle this action'
+            ];
+         }
+    
+        $identifier = $request->data['id'];
+    
+        $transaction = Transaction::where('identifier', $identifier)->first();
+
+        if (!$transaction) {
+            return [
+                'success' => false,
+                'message' => 'Transaction not found'
+            ];
+        }
+
+        $transactionData = Http::withHeaders([
+            'accept' => 'application/json',
+            'content-type' => 'application/json',
+            'Authorization' => 'Bearer ' . env('MERCADO_PAGO_ACCESS_TOKEN')
+        ])->get("https://api.mercadopago.com/v1/payments/$identifier");
+
+        $status = $transactionData['status'];
+
+        $transaction->status = $status;
+        $transaction->save();
+    
+        return [
+            'success' => $status == 'approved'
+        ];
     }
 }

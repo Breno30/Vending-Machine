@@ -25,6 +25,7 @@ Route::delete('/machines/{machine}/products/{id}', [MachinesController::class, '
 Route::get('/machines/{machine}/products', [MachinesController::class, 'listProduct']);
 
 Route::apiResource('/transactions', TransactionController::class);
+Route::post('/webhook', [TransactionController::class, 'handleWebhook']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
