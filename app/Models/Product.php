@@ -16,6 +16,11 @@ class Product extends Model
         parent::boot();
 
         static::deleting(function ($product) {
+            if (!$product->image ||
+                !Storage::disk('local')->exists($product->image)) {
+                return;
+            }
+
             Storage::delete($product->image);
         });
     }
