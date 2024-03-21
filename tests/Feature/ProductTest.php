@@ -4,13 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testIndex(): void
     {
         $response = $this->get('/api/products');

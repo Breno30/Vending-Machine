@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\Machine;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class MachineTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
+    use RefreshDatabase;
+
     public function testIndex(): void
     {
         $response = $this->get('/api/machines');
