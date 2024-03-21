@@ -17,6 +17,10 @@ class MachineFactory extends Factory
      */
     public function definition(): array
     {
+        if (User::count() === 0) {
+            User::factory()->create();
+        }
+
         return [
             'latitude' => fake()->latitude(),
             'longitude' => fake()->longitude(),
