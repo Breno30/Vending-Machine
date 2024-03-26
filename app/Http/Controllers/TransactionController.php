@@ -85,6 +85,7 @@ class TransactionController extends Controller
 
         return response()->json([
             'success' => true,
+            'identifier' => $identifier,    
             'qr_code' => $qrCode,
             'qr_code_link' => $qrCodeLink,
             'qr_code_base64' => $qrCodeBase
