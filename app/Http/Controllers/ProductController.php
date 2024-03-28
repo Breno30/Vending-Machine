@@ -25,16 +25,21 @@ class ProductController extends Controller
     public function store(StoreProductForm $request)
     {
 
-        // Store image
-        $imagePath = $request->file('image')->store('products');
-
-        // Create a new product
-        $product = Product::create([
+        $productData = [
             'name' => $request->name,
             'description' => $request->description,
-            'price' => $request->price,
-            'image' => $imagePath
-        ]);
+            'price' => $request->price
+        ];
+
+        // Store image
+        if ($request->has('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('products');
+            $productData['image'] = $imagePath;
+        }
+
+        // Create a new product
+        $product = Product::create($productData);
 
         return response()->json(['data' => $product], 201);
     }

@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "7a376f98-f80e-461b-98ff-c6b2c5470b66",
+		"name": "Vending Machine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18686596",
+		"_collection_link": "https://www.postman.com/crimson-sunset-281059/workspace/vending-machine/collection/18686596-7a376f98-f80e-461b-98ff-c6b2c5470b66?action=share&source=collection_link&creator=18686596"
+	},
+	"item": [
+		{
+			"name": "Product on Machine",
+			"item": [
+				{
+					"name": "Add product to machine",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"quantity\": 89\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/machines/12/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"machines",
+								"12",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product to machine",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/machines/12/products/8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"machines",
+								"12",
+								"products",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List products from machine",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/machines/2/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"machines",
+								"2",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Single Machine",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/machines/1?with-products=true",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"machines",
+						"1"
+					],
+					"query": [
+						{
+							"key": "with-products",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Machines",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/machines?with-products=true",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"machines"
+					],
+					"query": [
+						{
+							"key": "with-products",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Machine",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"latitude\": 19.98,\n    \"longitude\": 48.56,\n    \"owner_id\": \"1\",\n    \"products\": [\n        {\n            \"id\": 8,\n            \"quantity\": 96\n        },\n        {\n            \"id\": 5,\n            \"quantity\": 89\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/machines",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"machines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Machine",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"latitude\": 19.98,\n    \"longitude\": 42.56,\n    \"owner_id\": \"1\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/machines/12",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"machines",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Machine",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/machines/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"machines",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
