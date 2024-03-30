@@ -135,6 +135,12 @@ class TransactionController extends Controller
         $transaction->status = $status;
         $transaction->save();
     
+        $success = $status == 'approved';
+
+        if ($success) {
+            $transaction->markAsPaid();
+        }
+
         return [
             'success' => $status == 'approved'
         ];
