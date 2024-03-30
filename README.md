@@ -12,6 +12,10 @@ This vending machine should be of simple and fast usage, the main idea is to cre
         - [ ] Inform when machine is out of products
     - [ ] Sync account with physical device (by ip)
 
+- [x] Create API
+    - [x] CRUD for machines
+    - [x] CRUD for products
+    - [x] CRUD for transactions
 - [ ] Create physical device
     - [ ] Make requests to list items
     - [ ] Show items for customer
