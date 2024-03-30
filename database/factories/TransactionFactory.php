@@ -23,7 +23,8 @@ class TransactionFactory extends Factory
         return [
             'machine_product_id' => $relation->id,
             'type' => 'pix',
-            'identifier' => random_int(10000000, 99999999)
+            'identifier' => random_int(10000000, 99999999),
+            'status' => 'pending'
         ];
         
     }
