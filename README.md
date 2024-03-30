@@ -6,12 +6,12 @@ This vending machine should be of simple and fast usage, the main idea is to cre
 # Chores
 - [ ] Create website for managing products
     - [ ] Make login 
-    - [ ] Inform the bitcoin wallet to receive money
+    - [ ] Inform the mercado pago account to receive money
     - [ ] Sync account with physical device (by ip)
 
 - [ ] Create physical device
     - [ ] Make requests to list items
     - [ ] Show items for customer
     - [ ] Let user choose item
-    - [ ] Generate Bitcoin QR code with item price
+    - [ ] Generate PIX QR code with item price
     - [ ] Gets payment callback and give the item
