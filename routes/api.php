@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\MachinesController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\api\MachinesController;
+use App\Http\Controllers\api\ProductController;
+use App\Http\Controllers\api\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
