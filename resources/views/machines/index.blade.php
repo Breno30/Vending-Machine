@@ -11,10 +11,9 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @foreach ($machines as $machine)
                     <div class="bg-white dark:bg-gray-800 hover:opacity-80 overflow-hidden shadow-sm sm:rounded-lg p-4  place-self-center w-fit">
-                        <a href="{{ route('machines.show', ['machine' => $machine->id]) }}" class="">
-                            <img src="{{ asset('images/icon-vending-machine.png') }}" alt="Machine 1">
+                        <a href="{{ route('machines.show', ['machine' => $machine->id]) }}" class="grid gap-2">
+                            <img src="{{ asset('images/icon-vending-machine.png') }}" alt="{{ $machine->label }}">
                             <h4 class="text-md font-semibold text-center">{{ $machine->label }}</h4>
-                            <p class="text-sm text-center">{{ __('Description of Machine 1') }}</p>
                         </a>
                     </div>
                     @endforeach
