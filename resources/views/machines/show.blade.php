@@ -10,9 +10,9 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex gap-4 p-6 text-gray-900 dark:text-gray-100">
                     <img src="{{ asset('images/icon-vending-machine.png') }}" alt="Machine 1">
-                    <div>
+                    <div class="grid gap-4">
                         <h4 class="text-xl font-semibold">{{ $machine->label }}</h4>
-                        <p class="text-sm">{{ __('Description of Machine 1') }}</p>
+                        <iframe class="rounded-lg" src="https://maps.google.com/maps?q={{ $machine->latitude }},{{ $machine->longitude }}&amp;hl=es;z=14&amp;output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
