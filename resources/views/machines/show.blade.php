@@ -11,7 +11,7 @@
                 <div class="flex gap-4 p-6 text-gray-900 dark:text-gray-100">
                     <img src="{{ asset('images/icon-vending-machine.png') }}" alt="Machine 1">
                     <div>
-                        <h4 class="text-xl font-semibold">{{ $machine->id }}</h4>
+                        <h4 class="text-xl font-semibold">{{ $machine->label }}</h4>
                         <p class="text-sm">{{ __('Description of Machine 1') }}</p>
                     </div>
                 </div>

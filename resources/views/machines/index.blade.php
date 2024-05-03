@@ -13,7 +13,7 @@
                     <div class="bg-white dark:bg-gray-800 hover:opacity-80 overflow-hidden shadow-sm sm:rounded-lg p-4  place-self-center w-fit">
                         <a href="{{ route('machines.show', ['machine' => $machine->id]) }}" class="">
                             <img src="{{ asset('images/icon-vending-machine.png') }}" alt="Machine 1">
-                            <h4 class="text-md font-semibold text-center">{{ $machine->id }}</h4>
+                            <h4 class="text-md font-semibold text-center">{{ $machine->label }}</h4>
                             <p class="text-sm text-center">{{ __('Description of Machine 1') }}</p>
                         </a>
                     </div>
