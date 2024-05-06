@@ -11,7 +11,10 @@
                 <div class="flex gap-4 p-6 text-gray-900 dark:text-gray-100 items-center">
                     <img src="{{ asset('images/icon-vending-machine.png') }}" alt="{{ $machine->label }}" class="h-fit hidden sm:block">
                     <div class="grid gap-4 w-full">
-                        <h4 class="text-xl font-semibold">{{ $machine->label }}</h4>
+                        <div class="flex justify-between">
+                            <h4 class="text-xl font-semibold">{{ $machine->label }}</h4>
+                            <a title="Edit" href="{{ route('machines.edit', ['machine' => $machine->id]) }}">{{ __('Edit') }}</a>
+                        </div>
                         <iframe class="rounded-lg w-full" src="https://maps.google.com/maps?q={{ $machine->latitude }},{{ $machine->longitude }}&amp;hl=es;z=14&amp;output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
