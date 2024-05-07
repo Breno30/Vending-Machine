@@ -16,4 +16,9 @@ class MachinePolicy
     {
         return $user->id === $machine->owner_id;
     }
+
+    public function edit(User $user, Machine $machine): bool
+    {
+        return $user->id === $machine->owner_id;
+    }
 }

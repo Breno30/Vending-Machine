@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/machines', [MachinesController::class, 'index'])->name('machines.index');
     Route::get('/machines/{machine}', [MachinesController::class, 'show'])->name('machines.show');
+    Route::get('/machines/{machine}/edit', [MachinesController::class, 'edit'])->name('machines.edit');
+    Route::put('/machines/{machine}', [MachinesController::class, 'update'])->name('machines.update');
 });
 
 require __DIR__.'/auth.php';
