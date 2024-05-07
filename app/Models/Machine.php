@@ -9,7 +9,7 @@ class Machine extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['latitude', 'longitude', 'owner_id'];
+    protected $fillable = ['label', 'latitude', 'longitude', 'owner_id'];
 
     /**
      * Get the owner of the machine.

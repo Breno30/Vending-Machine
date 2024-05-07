@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
 
     public function machines() {
-        return $this->hasMany(Machine::class);
+        return $this->hasMany(Machine::class, 'owner_id');
     }
 }
