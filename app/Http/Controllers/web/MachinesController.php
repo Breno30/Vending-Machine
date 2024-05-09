@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
+use Illuminate\Support\Str;
 use App\Http\Controllers\api\MachinesController as ApiMachinesController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MachineRequest;
@@ -20,12 +21,53 @@ class MachinesController extends Controller
         return view('machines.index', ['machines' => $machines]);
     }
 
+    public function assignUuid(Request $request)
+    {
+        $uuid = Str::uuid();
+
+        Machine::create([
+            'uuid' => $uuid
+        ]);
+
+        return [
+            'uuid' => $uuid,
+            'machine-registration-link' => route('machines.register').'?uuid='.$uuid
+        ];
+    }
+
+    public function register(Request $request)
+    {
+        $uuid = $request->input('uuid');
+        $machine = Machine::where(['uuid' => $uuid])->get()->first();
+
+        if (!$machine) {
+            abort(404, 'Machine not found');
+        }
+
+        return view('machines.register', ['uuid' => $uuid]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MachineRequest $request)
     {
-        //
+        $uuid = $request->input('uuid');
+        $machine = Machine::where(['uuid' => $uuid])->get()->first();
+
+        if (!$machine) {
+            abort(404, 'Machine not found');
+        }
+
+        $ownerId = auth()->user()->id;
+        $ownerData = ['owner_id' => $ownerId];
+
+        $requestData = array_merge($request->all(), $ownerData);
+
+        $machine->fill($requestData);
+        $machine->save();
+
+        return view('machines.show', ['machine' => $machine]);
     }
 
     /**
