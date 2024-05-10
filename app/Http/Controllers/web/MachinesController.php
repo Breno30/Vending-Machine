@@ -38,6 +38,11 @@ class MachinesController extends Controller
     public function register(Request $request)
     {
         $uuid = $request->input('uuid');
+
+        if (!$uuid) {
+            abort(404, 'uuid not found');
+        }
+
         $machine = Machine::where(['uuid' => $uuid])->get()->first();
 
         if (!$machine) {
